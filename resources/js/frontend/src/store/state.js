@@ -14,7 +14,9 @@ import $ from "jquery";
 // /////////////////////////////////////////////
 const state = {
     posts: [],
-    currentPost:{}
+    currentPost:{},
+    speakLang: '',
+    learnLang:'',
 }
 
 export default state

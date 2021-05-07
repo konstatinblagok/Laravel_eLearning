@@ -15,6 +15,8 @@ import Frontend from './Frontend.vue'
 import axios from './axios.js'
 Vue.prototype.$http = axios
 
+window.axios = require('axios');
+
 // Vue Router
 import router from './router'
 

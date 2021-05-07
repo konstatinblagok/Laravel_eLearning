@@ -127,7 +127,14 @@ const mutations = {
     },
     SET_CURRENT_POST_FAVORITES(state, payload){
       state.currentPost.favorites = payload
-    }
+    },
+
+     setSpeakLanguage(state, payload) {
+      state.speakLang=payload;
+    },
+    setLearnLanguage(state, payload) {
+        state.learnLang=payload;
+    },
 }
 
 export default mutations

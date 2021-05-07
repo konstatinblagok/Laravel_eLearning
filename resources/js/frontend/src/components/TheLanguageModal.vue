@@ -22,10 +22,9 @@
                 <!--  -->
                 <div v-else class="row">
                     <div v-for="(flag, key) in langs" :key="key" class="col-xs-6 col-sm-4 col-md-4 col-lg-3 mt-1 mb-4" v-on:click="onCloseModal">
-                       <router-link :to="{name: isType }">
-                           <span :class="'flag-icon flag-icon-'+key"></span>
-                            <span>{{flag.name}}</span>
-                       </router-link>
+
+                           <a v-on:click="setLocale(key)"><span :class="'flag-icon flag-icon-'+key"></span>
+                               <span>{{flag.name}}</span></a>
                     </div>
                 </div>
 
@@ -71,8 +70,17 @@
             onCloseModal(){
                 this.$emit('isClosed', true)
             },
+
             setLocale(val){
                 this.$i18n.locale = val
+                if(this.headerType == 1){
+                    this.$store.commit('setSpeakLanguage', val)
+                }
+                if(this.headerType == 2){
+                    this.$store.commit('setLearnLanguage', val)
+                    this.$router.push(this.isType)
+                }
+
             }
         }
     }

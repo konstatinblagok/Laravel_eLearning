@@ -77,6 +77,7 @@ const actions = {
             });
         })
     },
+
     setFavoritePost({commit}, payload){
         const {id, favorites} = payload;
         return new Promise((resolve, reject) => {
