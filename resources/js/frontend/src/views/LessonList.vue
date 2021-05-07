@@ -6,14 +6,14 @@
                 Teach yourself German. Learn with 125 free lessons. There is no risk and no contract. Learn to speak German. Totally free!
             </p>
             <div class="row align-items-center justify-content-center wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1000ms">
-                <div class="row g-3">
+                <div class="row g-3" v-if="lessonList.length > 0">
                     <!-- Single Feature Area-->
                     <div v-for="lesson in lessonList" v-bind:key="lesson.id" class="col-12 col-sm-6 col-lg-3">
                         <router-link :to="{name:'lesson'}">
                         <div class="card feature-card">
                             <div class="card-body d-flex align-items-center row">
                                 <div class="fea-text col-10 col-sm-9 col-lg-9">
-                                    <h6>Lesson {{lesson.title}}</h6><span>Meeting someone</span>
+                                    <h6>{{lesson.title}}</h6><span>Meeting someone</span>
                                 </div>
 
                                 <div class=" col-2 col-sm-3 col-lg-3">
@@ -24,6 +24,9 @@
                         </router-link>
                     </div>
                     <the-contact-modal />
+                </div>
+                <div v-else>
+                    No Lessons Found
                 </div>
             </div>
         </div>
