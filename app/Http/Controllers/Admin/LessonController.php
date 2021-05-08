@@ -20,16 +20,16 @@ class LessonController extends Controller
     public function index()
     {
 
-        $ownLangusge = Language::where('key', request()->get('speakLang'))->first();
+        $ownLanguage = Language::where('key', request()->get('speakLang'))->first();
 
-        $learnLangusge = Language::where('key', request()->get('learnLang'))->first();
+        $learnLanguage = Language::where('key', request()->get('learnLang'))->first();
         $category = Category::where('name', request()->get('category'))->first();
 
         $arrLessons = [];
         $arrCourses = Course::with('lessons')
             ->where('category_id', $category->id)
-            ->where('own_id', $ownLangusge->id)
-            ->where('to_learn_id', $learnLangusge->id)
+            ->where('own_id', $ownLanguage->id)
+            ->where('to_learn_id', $learnLanguage->id)
             ->first();
 
         if($arrCourses && $arrCourses->count() > 0 ){
