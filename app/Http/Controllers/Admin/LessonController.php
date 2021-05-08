@@ -20,21 +20,23 @@ class LessonController extends Controller
     public function index()
     {
 
-        $ownLangusge = Language::where('key', request()->get('speakLang'))->whereHas('language_roles', function($query){
-            $query->where('name', 'Own');
-        })->first();
+        $ownLangusge = Language::where('key', request()->get('speakLang'))->first();
 
-        $learnLangusge = Language::where('key', request()->get('learnLang'))->whereHas('language_roles', function($query){
-            $query->where('name', 'To Learn');
-        })->first();
+        $learnLangusge = Language::where('key', request()->get('learnLang'))->first();
         $category = Category::where('name', request()->get('category'))->first();
-        $arrLessons = Course::with('lessons')
+
+        $arrLessons = [];
+        $arrCourses = Course::with('lessons')
             ->where('category_id', $category->id)
             ->where('own_id', $ownLangusge->id)
             ->where('to_learn_id', $learnLangusge->id)
             ->first();
 
-        return response()->json(['lessons' => $arrLessons->lessons], 201);
+        if($arrCourses && $arrCourses->count() > 0 ){
+            $arrLessons = $arrCourses->lessons;
+        }
+
+        return response()->json(['lessons' => $arrLessons ], 201);
     }
 
     /**
