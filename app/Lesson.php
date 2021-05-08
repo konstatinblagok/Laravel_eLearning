@@ -17,4 +17,12 @@ class Lesson extends Model
     {
         return $this->hasMany(LessonPart::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'id');
+    }
 }

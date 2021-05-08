@@ -48,15 +48,23 @@
       },
       computed: {
           ...mapState([
-
+              'speakLang', 'learnLang', 'category'
           ]),
+
       },
       created: function () {
          this.loadLessons();
       },
       methods:{
           loadLessons(){
-              axios.get('/api/lesson')
+
+              axios.get('/api/lesson', {
+                  params: {
+                      'speakLang':this.speakLang,
+                      'learnLang':this.learnLang,
+                      'category' :this.category.title
+                  }
+              })
                   .then(response => {
                       if(response.status == 200 || response.status == 201){
                          this.lessonList = response.data.lessons;

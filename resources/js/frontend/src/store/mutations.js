@@ -135,6 +135,9 @@ const mutations = {
     setLearnLanguage(state, payload) {
         state.learnLang=payload;
     },
+    setCategory(state, payload){
+        state.category=payload;
+    }
 }
 
 export default mutations

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
+use App\Course;
 use App\Http\Controllers\Controller;
+use App\Language;
 use App\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -16,8 +19,22 @@ class LessonController extends Controller
      */
     public function index()
     {
-        $arrLessons = Lesson::all();
-        return response()->json(['lessons' => $arrLessons], 201);
+
+        $ownLangusge = Language::where('key', request()->get('speakLang'))->whereHas('language_roles', function($query){
+            $query->where('name', 'Own');
+        })->first();
+
+        $learnLangusge = Language::where('key', request()->get('learnLang'))->whereHas('language_roles', function($query){
+            $query->where('name', 'To Learn');
+        })->first();
+        $category = Category::where('name', request()->get('category'))->first();
+        $arrLessons = Course::with('lessons')
+            ->where('category_id', $category->id)
+            ->where('own_id', $ownLangusge->id)
+            ->where('to_learn_id', $learnLangusge->id)
+            ->first();
+
+        return response()->json(['lessons' => $arrLessons->lessons], 201);
     }
 
     /**

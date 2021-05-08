@@ -12,7 +12,8 @@
             <div class="row justify-content-center g-5">
                 <!-- Single Service Area-->
                 <div v-for="(item, index) in category" :key="index" class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                    <router-link :to="{name: 'lesson-list'}">
+
+                        <a v-on:click="setCategory(item)" >
                         <div class="card service-card wow fadeInUp" :data-wow-delay="(400 + 100 * index )+'ms'" data-wow-duration="1000ms">
                             <div class="card-body">
                                 <div class="icon"><i :class="'lni lni-'+item.icon"></i></div>
@@ -20,7 +21,8 @@
                                 <p>{{item.subtitle}}</p>
                             </div>
                         </div>
-                    </router-link>
+                        </a>
+
                 </div>
             </div>
         </div>
@@ -55,6 +57,19 @@
             ]
             return list;
         }
+      },
+      methods: {
+          onCloseModal(){
+              this.$emit('isClosed', true)
+          },
+
+          setCategory(val){
+                  console.log('item')
+              console.log(val)
+                  this.$store.commit('setCategory', val)
+                  this.$router.push('lesson-list')
+
+          }
       }
   }
 </script>

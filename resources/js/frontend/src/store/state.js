@@ -17,6 +17,7 @@ const state = {
     currentPost:{},
     speakLang: '',
     learnLang:'',
+    category:''
 }
 
 export default state

@@ -55,7 +55,7 @@ emit: Boolean isClosed
                                         <input class="form-control mb-30" id="email" type="email" placeholder="care.designingworld@gmail.com" name="email" value="" required>
                                     </div>
                                     <div class="col-12">
-                                        <label for="subject">{{$t('Contact.topics')}}</label>
+                                        <label for="topics">{{$t('Contact.topics')}}</label>
                                         <input class="form-control mb-30" id="topics" type="text" placeholder="Presale Questions" name="topics" value="">
                                     </div>
                                     <div class="col-12">
