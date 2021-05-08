@@ -13,8 +13,8 @@
             <!--  Flag Element -->
                 <div v-if="headerType === 1" class="row">
                     <div v-for="(flag, key) in langs" :key="key" class="col-xs-6 col-sm-4 col-md-4 col-lg-3 mt-1 mb-4 cursor-on" v-on:click="onCloseModal">
-                        <a v-on:click="setLocale(key)">
-                            <span :class="'flag-icon flag-icon-'+key"></span>
+                        <a v-on:click="setLocale(flag.key)">
+                            <span :class="'flag-icon flag-icon-'+flag.key"></span>
                             <span>{{flag.name}}</span>
                         </a>
                     </div>
@@ -23,7 +23,7 @@
                 <div v-else class="row">
                     <div v-for="(flag, key) in langs" :key="key" class="col-xs-6 col-sm-4 col-md-4 col-lg-3 mt-1 mb-4" v-on:click="onCloseModal">
 
-                           <a v-on:click="setLocale(key)"><span :class="'flag-icon flag-icon-'+key"></span>
+                           <a v-on:click="setLocale(flag.key)"><span :class="'flag-icon flag-icon-'+flag.key"></span>
                                <span>{{flag.name}}</span></a>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import langs from '../LanguageList'
+    import {mapState} from 'vuex';
     export default {
         name: 'TheLanguageModal',
         props:{
@@ -46,16 +46,23 @@
         },
         data(){
             return {
-                langs: langs
+                langs: {}
             }
         },
+        created: function () {
+
+        },
         computed: {
+            ...mapState([
+                'speakLang', 'learnLang', 'category'
+            ]),
             isShown(){
                 return this.display
             },
             headerType(){
                 return this.type === 1 ? 1 : 2
             },
+
             isType(){
                 if (this.type === 1){
                     return "home"
@@ -70,7 +77,21 @@
             onCloseModal(){
                 this.$emit('isClosed', true)
             },
-
+            loadLanguages(type){
+                let languageType = (type == 1) ? 'speak' : 'learn'
+                axios.get('/api/languageModal', {
+                    params : {
+                        'type' : languageType
+                    }
+                })
+                    .then(response => {
+                        if(response.status == 200 || response.status == 201){
+                            this.langs = response.data.arrLang;
+                        }
+                    }).catch(error => {
+                    console.log(error)
+                })
+            },
             setLocale(val){
                 this.$i18n.locale = val
                 if(this.headerType == 1){

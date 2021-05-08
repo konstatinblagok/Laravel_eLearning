@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Course;
 use App\Http\Controllers\Controller;
 use App\Language;
+use App\Lesson;
 use http\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -27,6 +29,22 @@ class LanguageController extends Controller
                 'message' => $e->getMessage(),
             ], $e->getCode());
         }
+    }
+
+    public function LanguageModal(){
+
+        $type = request()->get('type');
+        $arrCourse =[];
+        if($type == 'speak'){
+            $arrCourse = Course::all()->pluck('own_id');
+        }else{
+            $arrCourse = Course::all()->pluck('to_learn_id');
+        }
+
+          $arrLang = Language::whereIn('id', $arrCourse)->get();
+
+        return response()->json(['arrLang' => $arrLang ], 201);
+
     }
 
     /**

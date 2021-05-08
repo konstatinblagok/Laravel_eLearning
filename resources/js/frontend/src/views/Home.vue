@@ -3,7 +3,7 @@
         <!-- Shop Area-->
         <div class="shop--area shop-fullwidth section-padding-120">
             <div class="container">
-                <the-language-modal :display=isShown :type="modal" @isClosed="closeModal" />
+                <the-language-modal :display=isShown :type="modal"  ref="langModal" @isClosed="closeModal" />
                 <h2 class="wow fadeInUp mt-3" data-wow-delay="200ms" data-wow-duration="1000ms">{{$t('Home.title')}}</h2>
                 <p class="mb-3 wow fadeInUp mt-5" data-wow-delay="300ms" data-wow-duration="1000ms">
                     {{$t('Home.subtitle')}}
@@ -82,6 +82,7 @@ import TheLanguageModal from '../components/TheLanguageModal.vue'
           selectLang(val){
               this.modal = val;
               this.display = true;
+              this.$refs.langModal.loadLanguages(val);
           }
       }
   }
