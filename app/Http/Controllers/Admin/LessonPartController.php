@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
+use App\Course;
 use App\Http\Controllers\Controller;
+use App\Language;
+use App\Lesson;
 use App\LessonPart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -27,6 +31,36 @@ class LessonPartController extends Controller
     public function create()
     {
         //
+    }
+
+
+    /**
+     * Get LessonPart.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLessonPart(Request $request)
+    {
+        $arrLessons = [];
+        $arrLessons['lesson'] = Lesson::where('id', $request->get('lesson'))->with('lesson_parts')->first();
+
+        $ownLanguage = Language::where('key', request()->get('speakLang'))->first();
+        $learnLanguage = Language::where('key', request()->get('learnLang'))->first();
+        $category = Category::where('name', request()->get('category'))->first();
+
+        $arrCourses = Course::with('lessons')
+            ->where('category_id', $category->id)
+            ->where('own_id', $ownLanguage->id)
+            ->where('to_learn_id', $learnLanguage->id)
+            ->first();
+        $arrLessons['learnLang'] = $learnLanguage->name;
+        if($arrCourses && $arrCourses->count() > 0 ){
+            $arrLessons['lessons'] = $arrCourses->lessons;
+        }
+
+
+        return response()->json(['lessons' => $arrLessons ], 200);
+
     }
 
     /**

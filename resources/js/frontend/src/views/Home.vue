@@ -82,7 +82,7 @@ import TheLanguageModal from '../components/TheLanguageModal.vue'
           selectLang(val){
               this.modal = val;
               this.display = true;
-              this.$refs.langModal.loadLanguages(val);
+              this.$refs.langModal.loadModalLanguages(val);
           }
       }
   }

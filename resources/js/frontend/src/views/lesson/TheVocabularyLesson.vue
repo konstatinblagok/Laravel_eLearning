@@ -12,9 +12,11 @@
                         >
                         </button>
                         <div class="slick-list draggable" style="padding: 0px 20px;">
+                            {{this.lessonPartList ? this.lessonPartList.length : 'check' }}
                             <div class="slick-track"
+                                 v-if="lessonPartList && lessonPartList.length > 0"
                                  :style="{opacity: 1, width: '9760px', transform: translate3d , 'transition': 'transform 500ms ease 0s'}">
-                                <div v-for="(item, index) in dataList" :key="index"
+                                <div v-for="(item, index) in lessonPartList" :key="index"
                                      :class="{'slick-slide':true, 'slick-current slick-center': index === currentSlide }"
                                      data-slick-index="1" aria-hidden="true"
                                      tabindex="-1">
@@ -27,13 +29,13 @@
                                                     <div class="slide-counter"></div>
                                                     <div class="card-background intro-slide">
                                                         <div class="intro-slide-number">
-                                                            {{item.id}}/{{dataList.length}}
+                                                            {{index+1}}/{{lessonPartList.length}}
                                                         </div>
                                                         <div class="intro-section">
                                                             <div class="intro-e-text ">
                                                                 <div
                                                                     class="intro-text english-text">
-                                                                    {{item.title}}
+                                                                    {{item.title}}title
                                                                 </div>
                                                             </div>
                                                             <div class="intro-lht-watermark"
@@ -42,7 +44,7 @@
                                                             </div>
                                                             <div class="intro-s-text" @click="directPlay(true)">
                                                                 <div class="intro-text spalan-text">
-                                                                    {{item.subtitle}}
+                                                                    {{item.subtitle}}subtitle
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -96,9 +98,12 @@
     export default {
         name: 'TheVocabularyLesson',
         components: {TheVocabularyLessonQuizCategory},
+        props: {
+            lessonPart: Array,
+        },
         data () {
             return {
-                dataList: this.$store.state.lesson.dataList,
+                dataList: this.lessonPart,
                 currentSlide: 0,
                 currentAudio: null,
                 isPlayable: false,
@@ -109,6 +114,9 @@
             }
         },
         methods: {
+            getLessonPart(){
+                return this.lessonPart ? this.lessonPart : this.dataList;
+            },
             startOverlay(){
                 this.isStartOverlay = false
                 this.isNextStatus += 1
@@ -133,7 +141,7 @@
                 this.currentSlide = val <= 0 ? 0 : val-1
             },
             next (val) {
-                this.currentSlide = val >= this.dataList.length ? this.dataList.length : val+1
+                this.currentSlide = val >= this.lessonPartList.length ? this.lessonPartList.length : val+1
             },
             timeDelay(){
                 this.isPlayable_temp = false
@@ -176,6 +184,9 @@
             }
         },
         computed: {
+            lessonPartList(){
+              return this.lessonPart
+            },
             translate3d () {
                 let width = window.innerWidth
                 let val = 0
@@ -207,7 +218,7 @@
                 if (this.isStartOverlay){
                     return 'none'
                 } else
-                    return this.currentSlide === this.dataList.length ? 'none' : 'block'
+                    return this.currentSlide === this.lessonPartList.length ? 'none' : 'block'
             },
             startOverlayBtn(){
                 return this.isStartOverlay ? 'block' : 'none'

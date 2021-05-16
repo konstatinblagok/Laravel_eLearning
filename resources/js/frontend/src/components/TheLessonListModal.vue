@@ -11,7 +11,7 @@ emit: Boolean isClosed
             <div class="cust-lesson-list-modal-content">
                 <div class="cust-modal-header" :style="style_lesson_full_name">
                     <span class="cust-close" v-on:click="onCloseModal">&times;</span>
-                    <h6 style="font-size: 20px" class="text-black-50">{{header}}</h6>
+                    <h6 style="font-size: 20px" class="text-black-50">{{ header }}</h6>
                 </div>
                 <div class="cust-modal-body mt-4 mb-3">
                     <!-- quiz area -->
@@ -24,7 +24,7 @@ emit: Boolean isClosed
                     <!-- lesson area -->
                     <div class="row g-3 mt-5">
                         <div :style="style_lesson_full_name">
-                            <router-link :to="{name:'category'}" class="cursor-on d-flex"><h5 class="mt-3" >More Afrikaans lessons    <i class="lni-arrow-right"></i></h5></router-link>
+                            <router-link :to="{name:'category'}" class="cursor-on d-flex"><h5 class="mt-3" >More {{learnlang}} lessons    <i class="lni-arrow-right"></i></h5></router-link>
                         </div>
                         <!-- Single Feature Area-->
                         <div v-for="n in 20" v-bind:key="n.id" class="col-12 col-sm-6 col-lg-6" v-on:click="onCloseModal">
@@ -44,7 +44,7 @@ emit: Boolean isClosed
                         </div>
                     </div>
                     <div :style="style_lesson_full_name">
-                        <router-link :to="{name:'category'}" class="cursor-on d-flex"><h5 class="mt-3" >More Afrikaans lessons    <i class="lni-arrow-right"></i></h5></router-link>
+                        <router-link :to="{name:'category'}" class="cursor-on d-flex"><h5 class="mt-3" >More {{learnlang}} lessons    <i class="lni-arrow-right"></i></h5></router-link>
                     </div>
                 </div>
                 <div class="cust-modal-footer align-content-center mb-4">
@@ -60,7 +60,10 @@ emit: Boolean isClosed
         name: 'TheLessonListModal',
         props: {
             display: Boolean,
-            selected_type: String
+            selected_type: String,
+            lessonlist: Object,
+            learnlang: String,
+            currentIndex: Number
         },
         data(){
             return {
@@ -76,7 +79,7 @@ emit: Boolean isClosed
                 return this.display
             },
             header(){
-                return "Meeting Someone"
+                return this.lessonlist.title
             },
         },
         methods: {

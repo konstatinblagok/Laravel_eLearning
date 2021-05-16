@@ -31,19 +31,19 @@ class LanguageController extends Controller
         }
     }
 
-    public function LanguageModal(){
+    public function languageModal(){
 
         $type = request()->get('type');
         $arrCourse =[];
-        if($type == 'speak'){
-            $arrCourse = Course::all()->pluck('own_id');
-        }else{
-            $arrCourse = Course::all()->pluck('to_learn_id');
-        }
+            $arrCourse['speak'] = Course::all()->pluck('own_id');
+            $arrCourse['learn'] = Course::all()->pluck('to_learn_id');
 
-          $arrLang = Language::whereIn('id', $arrCourse)->get();
+          $arrLang['speak'] = Language::whereIn('id', $arrCourse['speak'])->get();
+          $arrLang['learn'] = Language::whereIn('id', $arrCourse['learn'])->get();
 
-        return response()->json(['arrLang' => $arrLang ], 201);
+
+
+        return response()->json(['arrLang' => $arrLang], 201);
 
     }
 

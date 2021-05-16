@@ -64,11 +64,12 @@
           },
 
           setCategory(val){
-                  console.log('item')
-              console.log(val)
-                  this.$store.commit('setCategory', val)
-                  this.$router.push('lesson-list')
-
+              let speakLang = this.$route.params.speakLang;
+              let learnLang = this.$route.params.learnLang;
+              this.$store.commit('setCategory', val)
+              this.$router.push('lesson-list')
+              let category = val;
+              this.$router.push({path: `/speak/${speakLang}/learn/${learnLang}/category/${category.title}`})
           }
       }
   }

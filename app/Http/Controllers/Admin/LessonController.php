@@ -24,16 +24,15 @@ class LessonController extends Controller
 
         $learnLanguage = Language::where('key', request()->get('learnLang'))->first();
         $category = Category::where('name', request()->get('category'))->first();
-
         $arrLessons = [];
         $arrCourses = Course::with('lessons')
             ->where('category_id', $category->id)
             ->where('own_id', $ownLanguage->id)
             ->where('to_learn_id', $learnLanguage->id)
             ->first();
-
+        $arrLessons['learnLang'] = $learnLanguage->name;
         if($arrCourses && $arrCourses->count() > 0 ){
-            $arrLessons = $arrCourses->lessons;
+            $arrLessons['lessons'] = $arrCourses->lessons;
         }
 
         return response()->json(['lessons' => $arrLessons ], 201);

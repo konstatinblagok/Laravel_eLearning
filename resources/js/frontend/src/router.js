@@ -37,17 +37,17 @@ const router = new Router({
                     component: () => import('./views/Home.vue')
                 },
                 {
-                    path: '/category',
+                    path: '/speak/:speakLang/learn/:learnLang',
                     name: 'category',
                     component: () => import('./views/Category.vue')
                 },
                 {
-                    path: '/lesson-list',
+                    path: '/speak/:speakLang/learn/:learnLang/category/:category',
                     name: 'lesson-list',
                     component: () => import('./views/LessonList.vue')
                 },
                 {
-                    path: '/lesson',
+                    path: '/speak/:speakLang/learn/:learnLang/category/:category/lesson/:lessonId',
                     name: 'lesson',
                     component: () => import('./views/Lesson.vue')
                 },

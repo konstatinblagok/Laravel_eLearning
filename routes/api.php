@@ -19,7 +19,8 @@ Route::post('/login', 'Auth\LoginController@Login');
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('/logout', 'Auth\LoginController@Logout');
 });
-Route::get('/languageModal', 'Admin\LanguageController@LanguageModal');
+Route::get('/languageModal', 'Admin\LanguageController@languageModal');
+Route::get('/lessonpart', 'Admin\LessonPartController@getLessonPart');
 Route::resource('lesson', 'Admin\LessonController');
 Route::group(['middleware' => ['auth:sanctum', 'role:admin']],function(){
     Route::resource('course', 'Admin\CourseController');
