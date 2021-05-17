@@ -38,8 +38,12 @@ class LanguageController extends Controller
             $arrCourse['speak'] = Course::all()->pluck('own_id');
             $arrCourse['learn'] = Course::all()->pluck('to_learn_id');
 
-          $arrLang['speak'] = Language::whereIn('id', $arrCourse['speak'])->get();
-          $arrLang['learn'] = Language::whereIn('id', $arrCourse['learn'])->get();
+          $arrLang['speak'] = Language::whereHas('language_roles', function ($query){
+              $query->where('name', 'Own');
+          })->get();
+          $arrLang['learn'] = Language::whereHas('language_roles', function ($query){
+              $query->where('name', 'To Learn');
+          })->get();
 
 
 
