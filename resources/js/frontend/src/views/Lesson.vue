@@ -9,7 +9,7 @@
                         <h5>{{lesson.title}}</h5>
                     </a>
                     <a class="text-left cursor-on mt-5" v-on:click="selectLesson">
-                        <img class="selected-type" :src="'frontend/img/lesson-type/'+selected_type+'.svg'" width="30px" />
+                        <img class="selected-type" :src="'/frontend/img/lesson-type/'+selected_type+'.svg'" width="30px" />
                         <i class="dropdown-toggle" style="font-style: inherit;">{{selected_type}}</i>
                     </a>
                     <div class="mt-3 text-center">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-2 mb-5">
-                        <a v-for="n in lesson_type_list" v-bind:key="n.id" class="cursor-on" @click.stop="setQuiz(n)"><img class="lesson-type" :title="n" :src="'frontend/img/lesson-type/'+n+'.svg'" width="62px"/></a>
+                        <a v-for="n in lesson_type_list" v-bind:key="n.id" class="cursor-on" @click.stop="setQuiz(n)"><img class="lesson-type" :title="n" :src="'/frontend/img/lesson-type/'+n+'.svg'" width="62px"/></a>
                     </div>
                 </div>
                 <div :style="style_lesson_full_name">
