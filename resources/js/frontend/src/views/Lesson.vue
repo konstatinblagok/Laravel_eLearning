@@ -140,15 +140,12 @@
                 })
             },
             loadLessons(){
-                console.log(this.$route)
+
                 let speakLanguage = this.$route.params.speakLang;
                 let learnLanguage = this.$route.params.learnLang;
                 let category = this.$route.params.category;
                 let lesson = this.$route.params.lessonId;
-                console.log('check');
-                console.log(speakLanguage);
-                console.log(learnLanguage);
-                console.log(category);
+
                 axios.get('/api/lessonpart', {
                     params: {
                         'speakLang': speakLanguage,

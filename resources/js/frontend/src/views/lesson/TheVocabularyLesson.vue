@@ -35,7 +35,7 @@
                                                             <div class="intro-e-text ">
                                                                 <div
                                                                     class="intro-text english-text">
-                                                                    {{item.title}}title
+                                                                    {{item.title}}
                                                                 </div>
                                                             </div>
                                                             <div class="intro-lht-watermark"
@@ -44,7 +44,7 @@
                                                             </div>
                                                             <div class="intro-s-text" @click="directPlay(true)">
                                                                 <div class="intro-text spalan-text">
-                                                                    {{item.subtitle}}subtitle
+                                                                    {{item.subtitle}}
                                                                 </div>
                                                             </div>
                                                         </div>
