@@ -14,7 +14,7 @@
                             <div class="intro-section">
                                 <div class="row">
                                     <div v-for="item in lesson_type_list" class="col-3 col-md-3" style="text-align: -webkit-center;">
-                                        <img width="62px" class="cursor-on" @click.stop="setQuiz(item)" :title="item"  :src="`frontend/img/lesson-type/${item}.svg`" />
+                                        <img width="62px" class="cursor-on" @click.stop="setQuiz(item)" :title="item"  :src="`/frontend/img/lesson-type/${item}.svg`" />
                                     </div>
                                 </div>
                                 <p class="mt-5 cursor-on">Lesson 2: Meeting Someone</p>

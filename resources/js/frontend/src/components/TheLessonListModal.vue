@@ -17,7 +17,7 @@ emit: Boolean isClosed
                     <!-- quiz area -->
                    <div class="row">
                        <div v-for="n in lesson_type_list" v-bind:key="n.id" class="col-12 col-sm-6 col-lg-4">
-                           <a class="cursor-on" @click.stop="setQuiz(n)"><img class="lessong-type" :title="n" :src="'frontend/img/lesson-type/'+n+'.svg'" width="62px"/> <i class="text-black-50" style="font-style: inherit; font-size: 1.2em">{{n}}</i></a>
+                           <a class="cursor-on" @click.stop="setQuiz(n)"><img class="lessong-type" :title="n" :src="'/frontend/img/lesson-type/'+n+'.svg'" width="62px"/> <i class="text-black-50" style="font-style: inherit; font-size: 1.2em">{{n}}</i></a>
                        </div>
                    </div>
 
@@ -27,12 +27,12 @@ emit: Boolean isClosed
                             <router-link :to="{name:'category'}" class="cursor-on d-flex"><h5 class="mt-3" >More {{learnlang}} lessons    <i class="lni-arrow-right"></i></h5></router-link>
                         </div>
                         <!-- Single Feature Area-->
-                        <div v-for="n in 20" v-bind:key="n.id" class="col-12 col-sm-6 col-lg-6" v-on:click="onCloseModal">
+                        <div v-for="item, index in lessonlist" v-bind:key="item.id" v-if="currentIndex > (index+1)" class="col-12 col-sm-6 col-lg-6" v-on:click="onCloseModal">
                             <router-link :to="{name:'lesson'}"  >
                                 <div class="card feature-card">
                                     <div class="card-body d-flex align-items-center row">
                                         <div class="fea-text col-10 col-sm-10 col-lg-10">
-                                            <h6>Lesson {{n+1}}</h6><span>Meeting someone</span>
+                                            <h6>Lesson {{index+1}}</h6><span>{{item.title}}</span>
                                         </div>
 
                                         <div class=" col-2 col-sm-2 col-lg-2">

@@ -24,7 +24,7 @@
                     <div class="col-6 col-sm-6 col-lg-4" v-for="n in 6" :key="n">
                         <div class="card shop-card">
                             <router-link :to="{name: 'category'}">
-                                <div class="product-img-wrap"><img class="card-img-top" src="frontend/img/language.jpg" alt="">
+                                <div class="product-img-wrap"><img class="card-img-top" src="/frontend/img/language.jpg" alt="">
                                     <!-- Love Products--><a :class="n === 3 ? 'love-product active' : 'love-product'" href="#" data-toggle="tooltip" data-placement="right" title="Liked"><i class="lni-heart"></i></a>
                                 </div>
                                 <div class="product-meta d-flex align-items-center justify-content-between p-4">

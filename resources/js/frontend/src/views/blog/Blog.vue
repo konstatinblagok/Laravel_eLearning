@@ -18,7 +18,7 @@
                                 <div class="post-content p-4"><a class="d-block text-muted mb-2" href="#">{{formatDate(post.updated_at)}}</a><router-link class="post-title d-block mb-3" :to="`/blog-detail/${post.id}`">
                                     <h4>{{post.title}}</h4></router-link>
                                     <p></p>
-                                    <div class="post-meta d-flex align-items-center justify-content-between"><router-link class="post-author" :to="`/blog-detail/${post.id}`"><img src="frontend/img/bg-img/t1.png" alt=""></router-link><span class="text-muted">{{post.favorite}}</span></div>
+                                    <div class="post-meta d-flex align-items-center justify-content-between"><router-link class="post-author" :to="`/blog-detail/${post.id}`"><img src="/frontend/img/bg-img/t1.png" alt=""></router-link><span class="text-muted">{{post.favorite}}</span></div>
                                 </div>
                             </div>
                         </div>

@@ -9,7 +9,7 @@
             </div>
             <div class="row align-items-center justify-content-between wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1000ms">
                 <div class="col-12 col-lg-6">
-                    <div class="register-thumbnail mb-50"><img src="frontend/img/bg-img/1.png" alt=""></div>
+                    <div class="register-thumbnail mb-50"><img src="/frontend/img/bg-img/1.png" alt=""></div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="card register-card bg-gray p-1 p-sm-4 mb-50">
