@@ -35,7 +35,7 @@
                 <div class="row align-items-center justify-content-center wow fadeInUp" data-wow-delay="400ms" data-wow-duration="1000ms">
                     <div class="row g-3">
                         <!-- Single Feature Area-->
-                        <div v-for="lessonparts in lesson.lesson_parts" v-bind:key="lessonparts.id" class="col-12 col-sm-6 col-lg-6">
+                        <div v-for="lessonparts in lesson.lesson_parts" @click="redirectTo(lessonparts.id)" v-bind:key="lessonparts.id" class="col-12 col-sm-6 col-lg-6">
                             <a class="cursor-on">
                                 <div class="card feature-card">
                                     <div class="card-body d-flex align-items-center row">
@@ -138,6 +138,13 @@
 
                         }
                 })
+            },
+            redirectTo(lessonId){
+
+                    let speakLang = this.$route.params.speakLang;
+                    let learnLang = this.$route.params.learnLang;
+                    let category = this.$route.params.category
+                    this.$router.push({path: `/speak/${speakLang}/learn/${learnLang}/category/${category  }/lesson/${lessonId}`})
             },
             loadLessons(){
 

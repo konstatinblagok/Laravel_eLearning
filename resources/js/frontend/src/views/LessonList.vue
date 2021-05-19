@@ -64,14 +64,11 @@
               this.$router.push({path: `/speak/${speakLang}/learn/${learnLang}/category/${category  }/lesson/${lessonId}`})
           },
           loadLessons(){
-              console.log(this.$route)
+
               let speakLanguage = this.$route.params.speakLang;
               let learnLanguage = this.$route.params.learnLang;
               let category = this.$route.params.category;
-              console.log('check');
-              console.log(speakLanguage);
-              console.log(learnLanguage);
-              console.log(category);
+
               axios.get('/api/lesson', {
                   params: {
                       'speakLang': speakLanguage,
