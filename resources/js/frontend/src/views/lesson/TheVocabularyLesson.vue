@@ -12,7 +12,6 @@
                         >
                         </button>
                         <div class="slick-list draggable" style="padding: 0px 20px;">
-                            {{this.lessonPartList ? this.lessonPartList.length : 'check' }}
                             <div class="slick-track"
                                  v-if="lessonPartList && lessonPartList.length > 0"
                                  :style="{opacity: 1, width: '9760px', transform: translate3d , 'transition': 'transform 500ms ease 0s'}">

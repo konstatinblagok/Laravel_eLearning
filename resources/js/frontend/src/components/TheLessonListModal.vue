@@ -27,7 +27,7 @@ emit: Boolean isClosed
                             <router-link :to="{name:'category'}" class="cursor-on d-flex"><h5 class="mt-3" >More {{learnlang}} lessons    <i class="lni-arrow-right"></i></h5></router-link>
                         </div>
                         <!-- Single Feature Area-->
-                        <div v-for="item, index in lessonlist" v-bind:key="item.id" v-if="currentIndex > (index+1)" class="col-12 col-sm-6 col-lg-6" v-on:click="onCloseModal">
+                        <div v-for="item, index in lessonlist" v-bind:key="item.id" v-if="currentIndex < (index+1)" class="col-12 col-sm-6 col-lg-6" v-on:click="onCloseModal">
                             <router-link :to="{name:'lesson'}"  >
                                 <div class="card feature-card">
                                     <div class="card-body d-flex align-items-center row">
@@ -61,7 +61,7 @@ emit: Boolean isClosed
         props: {
             display: Boolean,
             selected_type: String,
-            lessonlist: Object,
+            lessonlist: Array,
             learnlang: String,
             currentIndex: Number
         },
@@ -79,7 +79,9 @@ emit: Boolean isClosed
                 return this.display
             },
             header(){
-                return this.lessonlist.title
+                if(this.currentIndex || this.currentIndex == 0){
+                    return this.lessonlist[this.currentIndex-1]?this.lessonlist[this.currentIndex-1].title : ''
+                }
             },
         },
         methods: {
@@ -89,7 +91,15 @@ emit: Boolean isClosed
             setQuiz(type){
                 this.$emit('setQuiz', type)
                 this.onCloseModal()
-            }
+            },
+            redirectTo(lessonId){
+
+                let speakLang = this.$route.params.speakLang;
+                let learnLang = this.$route.params.learnLang;
+                let category = this.$route.params.category
+                this.$router.push({path: `/speak/${speakLang}/learn/${learnLang}/category/${category}/lesson/${lessonId}`})
+                window.location.reload();
+            },
         }
     }
 </script>

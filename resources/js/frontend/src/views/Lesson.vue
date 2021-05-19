@@ -1,11 +1,11 @@
 <template>
     <div class="shop--area shop-fullwidth section-padding-120">
         <div class="container">
-            <the-lesson-list-modal :display="isShown" :learnlang="language" :lessonlist="lesson" :currentIndex="currentLessonIndex" :selected_type="selected_type" @setQuiz="setQuiz" @isClosed="closeModal"/>
+            <the-lesson-list-modal :display="isShown" :learnlang="language" :lessonlist="lessonList" :currentIndex="currentLessonIndex" :selected_type="selected_type" @setQuiz="setQuiz" @isClosed="closeModal"/>
             <div class="lesson-page">
                 <div class="wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1000ms">
                     <a class="text-left cursor-on" v-on:click="selectLesson">
-                        <i class="dropdown-toggle" style="font-style: inherit;">Learn {{language}} :: Lesson {{currentLessonIndex+1}}   </i>
+                        <i class="dropdown-toggle" style="font-style: inherit;">Learn {{language}} :: Lesson {{currentLessonIndex}}   </i>
                         <h5>{{lesson.title}}</h5>
                     </a>
                     <a class="text-left cursor-on mt-5" v-on:click="selectLesson">
@@ -35,7 +35,7 @@
                 <div class="row align-items-center justify-content-center wow fadeInUp" data-wow-delay="400ms" data-wow-duration="1000ms">
                     <div class="row g-3">
                         <!-- Single Feature Area-->
-                        <div v-for="lessonparts in lesson.lesson_parts" @click="redirectTo(lessonparts.id)" v-bind:key="lessonparts.id" class="col-12 col-sm-6 col-lg-6">
+                        <div v-for="lessonparts in lesson.lesson_parts"  v-bind:key="lessonparts.id" class="col-12 col-sm-6 col-lg-6">
                             <a class="cursor-on">
                                 <div class="card feature-card">
                                     <div class="card-body d-flex align-items-center row">
@@ -56,8 +56,8 @@
                         <div class="row align-items-center justify-content-center wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1000ms">
                             <div class="row g-3">
                                 <!-- Single Feature Area-->
-                                <div v-for="item, index in lessonList" v-bind:key="item.id" class="col-12 col-sm-6 col-lg-6">
-                                    <router-link :to="{name:'lesson'}">
+                                <div v-for="item, index in lessonList"  @click="redirectTo(item.id)" v-if="currentIndex < (index+1)" v-bind:key="item.id" class="col-12 col-sm-6 col-lg-6">
+
                                         <div class="card feature-card">
                                             <div class="card-body d-flex align-items-center row">
                                                 <div class="fea-text col-9 col-sm-9 col-lg-9">
@@ -69,7 +69,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </router-link>
+
                                 </div>
                             </div>
                         </div>
@@ -115,14 +115,14 @@
                 },
                 display: false,
                 lesson: {},
-                lessonList: {},
+                lessonList: [],
                 currentLessonIndex:0,
                 category : ''
             }
         },
         created: function () {
             this.loadLessons();
-            this.setCurrentIndexOnLoad()
+
         },
         computed:{
           isShown(){
@@ -132,8 +132,10 @@
         methods:{
             setCurrentIndexOnLoad(){
                 let lesson = this.$route.params.lessonId;
-                    $.each(this.lesson, (index, value)=>{
-                        if(value.lesson_id == lesson){
+                    $.each(this.lessonList, (index, value)=>{
+                        console.log(value)
+                        console.log(lesson)
+                        if(value.id == lesson){
                             this.currentLessonIndex = index + 1
 
                         }
@@ -145,6 +147,7 @@
                     let learnLang = this.$route.params.learnLang;
                     let category = this.$route.params.category
                     this.$router.push({path: `/speak/${speakLang}/learn/${learnLang}/category/${category  }/lesson/${lessonId}`})
+                    this.loadLessons()
             },
             loadLessons(){
 
@@ -167,6 +170,7 @@
                             this.category = category
                             this.lesson = response.data.lessons.lesson;
                             this.lessonList = response.data.lessons.lessons
+                            this.setCurrentIndexOnLoad()
                         }
                     }).catch(error => {
                     console.log(error)
