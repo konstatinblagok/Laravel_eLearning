@@ -10,12 +10,20 @@ class Lesson extends Model
         'title'
     ];
 
+    protected $appends = ['hasLessonPart'];
     /**
      * Get lesson_parts for the lesson.
      */
     public function lesson_parts()
     {
         return $this->hasMany(LessonPart::class);
+    }
+
+    public function getHasLessonPartAttribute()
+    {
+
+        return $this->lesson_parts()->get();
+
     }
 
     /**
@@ -25,4 +33,6 @@ class Lesson extends Model
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
+
+
 }

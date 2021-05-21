@@ -63,7 +63,7 @@ class PostController extends Controller
             $img_name = time().'.'.$extension;
             $img_src = $request->file('cover_image')->storeAs('/uploads/blog', $img_name, 'public');
             $post->title = $request['title'];
-            $post->cover_image = '/storage/app/public/'.$img_src;
+            $post->cover_image = '/storage/'.$img_src;
             $post->category_id = $request['category'];
             $post->content = $request['content'];
             $post->favorites = 0;

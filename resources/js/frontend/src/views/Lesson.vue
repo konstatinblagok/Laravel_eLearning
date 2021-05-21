@@ -12,7 +12,7 @@
                         <img class="selected-type" :src="'/frontend/img/lesson-type/'+selected_type+'.svg'" width="30px" />
                         <i class="dropdown-toggle" style="font-style: inherit;">{{selected_type}}</i>
                     </a>
-                    <div class="mt-3 text-center">
+                    <div class="mt-3 text-center" v-if="lesson.hasLessonPart && lesson.hasLessonPart.length > 0">
                         <div class="min-height-container lesson-position">
                             <div id="modal-lesson-area"></div>
                             <div id="slide-modal-body">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center mt-2 mb-5">
+                    <div v-if="lesson.hasLessonPart && lesson.hasLessonPart.length > 0" class="d-flex justify-content-center mt-2 mb-5">
                         <a v-for="n in lesson_type_list" v-bind:key="n.id" class="cursor-on" @click.stop="setQuiz(n)"><img class="lesson-type" :title="n" :src="'/frontend/img/lesson-type/'+n+'.svg'" width="62px"/></a>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                         <div class="row align-items-center justify-content-center wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1000ms">
                             <div class="row g-3">
                                 <!-- Single Feature Area-->
-                                <div v-for="item, index in lessonList"  @click="redirectTo(item.id)" v-if="currentIndex < (index+1)" v-bind:key="item.id" class="col-12 col-sm-6 col-lg-6">
+                                <div v-for="item, index in lessonList"  @click="redirectTo(item.id)" v-if="currentLessonIndex < (index+1)" v-bind:key="item.id" class="col-12 col-sm-6 col-lg-6">
 
                                         <div class="card feature-card">
                                             <div class="card-body d-flex align-items-center row">
