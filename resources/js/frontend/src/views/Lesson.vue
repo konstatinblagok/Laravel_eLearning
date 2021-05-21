@@ -16,7 +16,7 @@
                         <div class="min-height-container lesson-position">
                             <div id="modal-lesson-area"></div>
                             <div id="slide-modal-body">
-                                <the-vocabulary-lesson v-if="selected_type === 'Vocabulary lesson'"  :lessonPart="lesson ? lesson.lesson_parts : []" @setQuiz = "setQuiz" />
+                                <the-vocabulary-lesson v-if="selected_type === 'Vocabulary lesson'" ref="vocab"  :lessonPart="lesson ? lesson.lesson_parts : []" @setQuiz = "setQuiz" />
                                 <the-listening-game v-if="selected_type === 'Listening game'" />
                                 <the-matching-game v-if="selected_type === 'Matching game'" />
                                 <the-fill-the-blanks v-if="selected_type === 'Fill the blank'" />
@@ -37,10 +37,16 @@
                         <!-- Single Feature Area-->
                         <div v-for="lessonparts in lesson.lesson_parts"  v-bind:key="lessonparts.id" class="col-12 col-sm-6 col-lg-6">
                             <a class="cursor-on">
-                                <div class="card feature-card">
+                                <div class="card feature-card"  @click="stopOthers(lessonparts.src)">
                                     <div class="card-body d-flex align-items-center row">
                                         <div class="fea-text col-10 col-sm-10 col-lg-10">
-                                            <span>{{lessonparts.title}}</span><br><span class="mt-2">{{lessonparts.sub_title}}</span>
+                                            <!--<span>{{lessonparts.title}}-->
+                                                <!--<audio :ref="`player-${lessonparts.title}`" >-->
+                                                    <!--<source :src="lessonparts.src"  type="audio/mp3">-->
+                                                <!--</audio>-->
+                                            <!--</span>-->
+                                            <br>
+                                            <span class="mt-2">{{lessonparts.sub_title}}</span>
                                         </div>
                                         <div class=" col-2 col-sm-2 col-lg-2">
                                             <i class="lni-play lesson-arrow"></i>
@@ -117,7 +123,9 @@
                 lesson: {},
                 lessonList: [],
                 currentLessonIndex:0,
-                category : ''
+                category : '',
+                previosplay:null,
+                previostrack:''
             }
         },
         created: function () {
@@ -133,13 +141,27 @@
             setCurrentIndexOnLoad(){
                 let lesson = this.$route.params.lessonId;
                     $.each(this.lessonList, (index, value)=>{
-                        console.log(value)
-                        console.log(lesson)
                         if(value.id == lesson){
                             this.currentLessonIndex = index + 1
 
                         }
                 })
+            },
+            stopOthers(newTrack) {
+                this.$refs.vocab.directPlay(false);
+                let audio = new Audio(newTrack);
+                if(this.previosplay){
+                    this.previosplay.pause();
+                }
+                if(this.previostrack != newTrack){
+                    console.log(audio)
+                    audio.play();
+                    this.previosplay = audio;
+                }else{
+                    this.previosplay.pause();
+
+}
+
             },
             redirectTo(lessonId){
 
