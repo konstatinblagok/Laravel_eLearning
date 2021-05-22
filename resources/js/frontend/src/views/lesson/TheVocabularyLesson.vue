@@ -32,8 +32,7 @@
                                                         </div>
                                                         <div class="intro-section">
                                                             <div class="intro-e-text ">
-                                                                <div
-                                                                    class="intro-text english-text">
+                                                                <div class="intro-text english-text">
                                                                     {{item.title}}
                                                                 </div>
                                                             </div>
@@ -43,7 +42,7 @@
                                                             </div>
                                                             <div class="intro-s-text" @click="directPlay(true)">
                                                                 <div class="intro-text spalan-text">
-                                                                    {{item.subtitle}}
+                                                                    {{item.sub_title}}
                                                                 </div>
                                                             </div>
                                                         </div>

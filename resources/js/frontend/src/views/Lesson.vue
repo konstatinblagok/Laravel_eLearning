@@ -40,10 +40,13 @@
                                 <div class="card feature-card"  @click="stopOthers(lessonparts.src)">
                                     <div class="card-body d-flex align-items-center row">
                                         <div class="fea-text col-10 col-sm-10 col-lg-10">
-                                            <span>{{lessonparts.title}}
+                                            <span>
+                                                {{lessonparts.title}}
                                             </span>
                                             <br>
-                                            <span class="mt-2">{{lessonparts.sub_title}}</span>
+                                            <span class="mt-2">
+                                                {{lessonparts.sub_title}}
+                                            </span>
                                         </div>
                                         <div class=" col-2 col-sm-2 col-lg-2">
                                             <i class="lni-play lesson-arrow"></i>
