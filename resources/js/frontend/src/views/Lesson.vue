@@ -40,11 +40,8 @@
                                 <div class="card feature-card"  @click="stopOthers(lessonparts.src)">
                                     <div class="card-body d-flex align-items-center row">
                                         <div class="fea-text col-10 col-sm-10 col-lg-10">
-                                            <!--<span>{{lessonparts.title}}-->
-                                                <!--<audio :ref="`player-${lessonparts.title}`" >-->
-                                                    <!--<source :src="lessonparts.src"  type="audio/mp3">-->
-                                                <!--</audio>-->
-                                            <!--</span>-->
+                                            <span>{{lessonparts.title}}
+                                            </span>
                                             <br>
                                             <span class="mt-2">{{lessonparts.sub_title}}</span>
                                         </div>
